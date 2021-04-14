@@ -219,3 +219,30 @@ align-items: center;
     /* overflow-x: hidden; */
 
 }
+#footerheading{
+    color:rgb(39, 80, 156);
+    text-align: center;
+    font-family: 'Cormorant Unicase', serif;
+}
+
+.footerdiv{
+    width:30%;
+    float:left;
+    color:white;
+    text-align: center;
+}
+
+.fab{
+    font-size: large;
+}
+
+
+a { 
+    color: inherit; 
+    text-decoration: none;
+} 
+
+.footerdiv{
+    text-indent: 20px;
+    line-height: 1.6;
+}

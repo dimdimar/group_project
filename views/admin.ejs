@@ -96,7 +96,6 @@
             const reader = new FileReader();
         
             reader.addEventListener("load", function () {
-            // convert image file to base64 string
             preview.src = reader.result;
             }, false);
         
@@ -111,12 +110,7 @@
         function decline(index){;
             document.getElementsByClassName(`${index}`)[0].setAttribute("action","/admin/declined")
         }
-            // childs.forEach(element => {
-            //     element.removeAttribute("disabled")
-            // });
-        //    form = 
-           
-
+      
     </script>
 
 </body>
