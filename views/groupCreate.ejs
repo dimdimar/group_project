@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/img/fundain_logo.png" />
+    <link rel="stylesheet" href="/stylesheets/groupFlex.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Chango&family=Cormorant+Unicase:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>Fundain</title>
+  </head>
+  <body>
+    <div id="container" class="">
+      <div class="backgroundGradient">
+        <header class="blurGlass">
+          <h1>Welcome To The Fundain!</h1>
+        </header>
+      </div>
+      <form action="groupcreate/create" method="POST" enctype="multipart/form-data">
+        <div id="titleDiv">
+          <input type="text" class="textInputs" style="
+          width: 25%;
+          font-size: xx-large" placeholder="Title" name="title">
+        </div>
+        <div class="groupsPage groupsHead" id="image">
+          <input type="file" accept=".png, .jpg, .jpeg" id="text" onchange="previewFile()" style="position: absolute;
+          z-index: 2;
+          width: 100%;
+          height: 100%;"  name="photo"/>
+          <img src="/img/image.svg" alt="" width="100%" height="100%" >
+        </div>
+
+      <div id="followers">
+        <h4>Followers</h4>
+        <p></p>
+      </div>
+
+      <div class="main_container">
+        <nav>
+          <label for="description">Description:</label><br />
+          <textarea id="description" name="description"  rows="4" cols="50">
+            Type the description of your Donation Group here...
+          </textarea>
+        </nav>
+        <main class="backgroundGradient">
+          <div>
+            <label for="category">Choose a category</label><br>
+            <select name="categories" class="category">
+              <% for (i =0 ; i < results.length; i++){ %>
+              <option value="<%=results[i].category_id%>"><%=results[i].category_name%></option>
+              <% } %>
+            </select>
+
+          </div>
+        </main>
+        <aside>
+          <p></p>
+          <p>
+            <label for="target">Place here target funds</label><br />
+            <input class="textInputs" type="number" name="target" id="target" /><br />
+            <label for="minDonation"> Place here minimum Donation</label><br />
+            <input class="textInputs" type="number" name="minDonation" id="minDonation" />
+          </p>
+            <input type="submit" value="Create New Donation Group">
+          </form>
+        </aside>
+      </div>
+      <footer></footer>
+    </div>
+  </body>
+  <script src="/javascript/groupCreate.js"></script>
+</html>

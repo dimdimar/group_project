@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="icon" href="/img/fundain_logo.png">
+    <script src="/javascript/payment.js" defer></script>
+    <link href="/stylesheets/payment.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <ul class="tabs">
+        <a href="<%=Url%>/dashboard" style="display: contents;"><img src="/img/fundain_logo.png" height="100%" alt="Logo.png"></a>
+
+        <li data-tab-target="#personalInfo" class="active tab">Personal Information</li>
+        <li data-tab-target="#paymentMeth" class="tab">Payment Methods</li>
+        <li data-tab-target="#profileSet" class="tab">Profile Settings</li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="personalInfo" data-tab-content class="active">
+            <form action="settings/photo"method="POST" enctype="multipart/form-data">
+            <div id="photo"><input type="file" accept=".png, .jpg, .jpeg" id="text" onchange="previewFile()" style="position: absolute;
+                z-index: 2;
+                width: inherit;
+                height: inherit;"  name="photoEntry"/>
+                 <img src="" alt=""  height="100%" >    
+            </div>
+            <div id="changePhoto"><input type="button" onclick="submit()" value="Change Profile Photo"></div>
+        </form>
+            <div class="insidebox">
+                <form method="POST" action="settings/pass" >
+                    <p>Change your Password</p>
+                    <input class="inp" type="password" placeholder="Current password" style="margin-bottom: 10px;" name="currentPassword"><br>
+                    <input class="inp" type="password" placeholder="New password"  style="margin-bottom: 10px;" name="pass"><br>
+                    <input class="inp" type="password" placeholder="Confirm New password" 
+                        style="margin-bottom: 10px;" name="confPass"><br>
+                    <input type="submit" value="Change Password" class="btnchangepass">
+                </form>
+               
+                <div id="" onclick="off()"><%= message %></div>
+
+            </div>
+            <div class="insidebox">
+                <div class="insidebox">
+                    <form method="POST" action="settings/Telephone">
+                        <p>Change your Telephone Number</p>
+                        <input class="inp" type="tel" placeholder="Current Telephone Number" style="margin-bottom: 10px;" name="currentTelephone"><br>
+                        <input class="inp" type="tel" placeholder=" New Telephone Number" style="margin-bottom: 10px;" name="newTelephone"><br>
+                        <!-- <input class="inp" type="password" placeholder="Validation Code" style="margin-bottom: 10px;"><br> -->
+                        <input type="submit" value="Submit New Number" class="btnchangetel">
+                        <!-- <input type="submit" value="Send Validation Code" class="btnchangepass" style="margin-right: 0;"> -->
+                    </form>
+    
+                </div>
+
+            </div>
+            <div class="insidebox">
+                <form method="POST" action="settings/Location">
+                    <p>Change your Location</p>
+                    <input class="inp" type="text" placeholder="Change Location (country)"
+                        style="margin-bottom: 10px;" name="country"><br>
+                    <input type="submit" value="Submit New Location" class="btnchangepass">
+                </form>
+
+            </div>
+        </div>
+
+        <div id="paymentMeth" data-tab-content>
+            <h1>Select your Payment Method</h1>
+
+            <form id="paymentMethod">
+                
+                <p><input type="radio" name="oneAnswer"> Paypal</p>
+                <p><input type="radio" name="oneAnswer"> Credit or Debit card</p>
+
+                <input type="submit" value="Confirm" id="confMethod">
+
+            </form>
+        </div>
+
+        <!-- <div id="profileSet" data-tab-content>
+        <h1>Bank Transfer</h1>
+        <h3 class="lastStep">You will Donate ${amount} to ${groupsTitle}</h3>
+        <p>Is this correct? <input type="radio"> Yes </p>
+        <h6>if the amount or something else is incorrect please go back to the <a href="">Previous page</a></h6>
+        <form>
+            <p>Donate via Bank Transfer</p>
+            <input type="email" placeholder="e-mail" style="margin-bottom: 10px;"><br>
+            <input type="password" placeholder="Bank account">
+            <p><input type="checkbox">I'm not a robot</p>
+            <input type="submit" value="Confirm">
+
+        </form>
+    </div> -->
+
+
+
+
+    </div>
+
+    <script>
+        function previewFile() {
+            const preview = document.querySelector('img');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+        
+            reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+            }, false);
+        
+            if (file) {
+            reader.readAsDataURL(file);
+            }
+        }
+        function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+    </script>
+
+</body>
+
+</html>

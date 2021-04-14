@@ -1,0 +1,220 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Chango&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+.bubble{
+    margin: 10px;
+    border-radius: 10px;
+}
+.blurGlass{
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 5.5px );
+    -webkit-backdrop-filter: blur( 5.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+body{
+background-color: rgb(177, 177, 177);
+}
+.backgroundGradient{
+    background-image: radial-gradient(circle at 40% 91%, rgba(251, 251, 251,0.04) 0%, rgba(251, 251, 251,0.04) 50%,rgba(229, 229, 229,0.04) 50%, rgba(229, 229, 229,0.04) 100%),radial-gradient(circle at 66% 97%, rgba(36, 36, 36,0.04) 0%, rgba(36, 36, 36,0.04) 50%,rgba(46, 46, 46,0.04) 50%, rgba(46, 46, 46,0.04) 100%),radial-gradient(circle at 86% 7%, rgba(40, 40, 40,0.04) 0%, rgba(40, 40, 40,0.04) 50%,rgba(200, 200, 200,0.04) 50%, rgba(200, 200, 200,0.04) 100%),radial-gradient(circle at 15% 16%, rgba(99, 99, 99,0.04) 0%, rgba(99, 99, 99,0.04) 50%,rgba(45, 45, 45,0.04) 50%, rgba(45, 45, 45,0.04) 100%),radial-gradient(circle at 75% 99%, rgba(243, 243, 243,0.04) 0%, rgba(243, 243, 243,0.04) 50%,rgba(37, 37, 37,0.04) 50%, rgba(37, 37, 37,0.04) 100%),linear-gradient(90deg, rgb(34, 222, 237),rgb(135, 89, 215));
+
+}
+#container{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+        
+}
+.main_container{
+    display: flex;
+    height: fit-content ;
+    min-height: 100vh;
+}
+
+header { 
+ height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+
+text-align: center;
+font-size: x-large;
+}
+h1{
+   font-family: 'Cormorant Unicase', serif;
+   text-align: center;
+   font-size: xxx-large;
+
+}
+
+
+
+
+ nav { 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(124 37 210 / 43%);
+    border-radius: 15px;
+    height: 15vh;
+    order: 1;
+    position: sticky;
+
+
+    }
+   
+.textInputs{
+    text-align: center;
+    height: 5vh;
+    border-radius: 20px;
+}
+#donateBtn{
+    width: 80%;
+    margin: 1%;
+    margin-left: 10%;
+}
+
+ main { 
+    flex: 2;
+     background-color: rgba(240, 248, 255, 13%);
+     border-radius: 15px;
+    order: 2;
+
+   }
+
+ 
+ aside {
+    flex: 1;
+    border-radius: 15px;
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+ 
+ footer { 
+ 
+     background-color: rgb(0, 0, 0);
+     border-radius: 15px;  
+     height: 150px;
+     justify-content: flex-end;
+   
+     
+ } 
+ 
+ .groupsHead{
+    height: 60vh;
+    background-color: rgb(131 134 136 / 72%);
+    width: 80%;
+    border-radius: 20px;
+    margin-left: 10%;
+    border-style: solid;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+ }
+
+ #chat-wrapper{
+     display:flex;
+     width: 25vw;
+     height: 50vh;
+     background-color: rgb(255, 255, 255);
+     float: right;
+     top: revert;
+     right: revert;
+     position: sticky;
+     border-radius: 10px;
+     outline: auto;
+     z-index: 2;
+ }
+ #chatBox{
+    display:flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 50vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    outline: auto;
+    z-index: 2;
+ }
+ #textDisplay {
+    height: 43vh;
+    background-image:linear-gradient(45deg, white, #00000078);
+    width: 24vw;
+    transform: translate(0.5vw, 0.5vh);
+    display: table-cell;
+    overflow-y: hidden;
+
+    
+}   
+#chatControl {
+    transform: translate(0px, 20px);
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#chatControl input {
+    width: 85%;
+    height: 100%;
+    transform: translate(5px, 0px);
+
+}
+#chatControl button{
+    width: 10%;
+    height: 115%;
+    transform: translate(5px, 0px);
+
+}
+#titleDiv{
+display: flex;
+align-self: center;
+flex-direction: column;
+align-items: center;
+}
+#followers{
+    order: 2;
+    justify-self: normal;
+    align-self: center;
+    transform: translate(46px, 10px);
+    text-align: center;
+}
+
+
+#image{
+    position: relative;
+ 
+}
+
+#groupsHeadFlex{
+    display: flex;
+    flex-direction: row;
+}
+
+.newPost{
+    width: 30vw;
+    height: 10vh;
+   
+}
+#messages{
+    display: flex;
+    height: inherit;
+    width: inherit;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    list-style: none;
+
+    /* overflow-x: hidden; */
+
+}

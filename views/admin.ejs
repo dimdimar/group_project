@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="icon" href="/img/fundain_logo.png">
+    <script src="/javascript/payment.js" defer></script>
+    <link href="/stylesheets/admin.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <ul class="tabs">
+        <a href="<%=Url%>/dashboard" style="display: contents;"><img src="/img/fundain_logo.png" height="100%" alt="Logo.png"></a>
+        <li data-tab-target="#personalInfo" class="active tab">New Group Requests</li>
+        <li data-tab-target="#paymentMeth" class="tab">Users</li>
+
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="personalInfo" data-tab-content class="active">
+            
+            <div class="insidebox">
+                <% if (groupRequests){ %>
+                <%groupRequests.forEach((element, i ) => { %>
+                    <div class="formFlex" >
+                        <form method="POST" action="" class="grid-form  <%= i %>">
+                            
+                            <div class="photoFlex">
+                                <img src="/<%= element?.photo %>" alt="" name = "photo" width="100%"> 
+                            </div>
+                            <button onclick="approve('<%=i%>')" class="approve btn">approve</button>
+                            <button class="decline btn" onclick="decline('<%=i%>')">decline</button>
+                            <div class="titleFlex">
+                                <p> title</p> <br> <p> description </p> <br> <p> Goal </p>
+                                 Minimum Donation  
+                                 <p> Users id </p> categories 
+                            </div>
+                            <div class="inputFlex">
+                                <input type="number" hidden name="jsonIndex" value = "<%= i %>" >
+                                <input type="text" hidden value="<%= element?.photo %>" name="photo">
+                                <input type="text" class="form<%= i %>" disabled  name="title" value="<%=element?.title %>"><br>
+                                
+                                <textarea name="description" class="form<%= i %>" cols="30" rows="10" disabled><%= element?.description %></textarea><br>
+                                
+                                <input type="number"class="form<%= i %>" name="targetFunds"  value="<%=element?.targetFunds%>" disabled ><br>
+                                
+                                <input type="number" class="form<%= i %>" name="minDonation" value= "<%=element?.minDonation %>" disabled><br>
+                                
+                                <input type="number" class="form<%= i %>" name="users_id" value = "<%=element?.userId %>" disabled><br>
+                                
+                                <input type="text" class="form<%= i %>" name="categories" value="<%=element?.categories %>" disabled>
+                                
+                            </div>
+
+                        </form>
+                    </div>
+                <% }) %>
+                <% } else{ %>
+                    <div>
+                        <h1>No new Requests</h1>
+                    </div>
+                    <% } %>
+            </div>
+    </div>
+    <div id="paymentMeth" data-tab-content class>
+        <h1>Find a User</h1>
+
+        <form id="paymentMethod" method="POST" action="/admin/users">
+            
+            <p><input type="search" name="fname" placeholder="users first name"></p>
+            <p><input type="search" name="lname" placeholder="users last name"></p>
+            <input type="submit" value="Confirm" id="confMethod">
+
+        </form>
+        <% if(results.length){ %>
+        <% for (i = 0 ; i < results.length ; i++) { %>
+        <form action="newAdmin" method="POST">
+        <input type="text" value="<%=results[i].first_name%>">
+        <input type="text" value="<%=results[i].last_name%>">
+        <input type="text" name="userId" value="<%=results[i].user_id%>">
+        <input type="submit" value="New Admin">
+        </form>
+        <% } %>
+        <% } %>
+    </div>
+
+    <script>
+        function previewFile() {
+            const preview = document.querySelector('img');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+        
+            reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+            }, false);
+        
+            if (file) {
+            reader.readAsDataURL(file);
+            }
+        }
+        function approve(index){
+            document.getElementsByClassName(`${index}`)[0].setAttribute("action","/admin/approved")
+        }
+
+        function decline(index){;
+            document.getElementsByClassName(`${index}`)[0].setAttribute("action","/admin/declined")
+        }
+            // childs.forEach(element => {
+            //     element.removeAttribute("disabled")
+            // });
+        //    form = 
+           
+
+    </script>
+
+</body>
+
+</html>

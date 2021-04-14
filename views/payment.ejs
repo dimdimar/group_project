@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundain</title>
+    <script src="/javascript/payment.js" defer></script>
+    <link href="/stylesheets/payment.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <ul class="tabs">
+        <li data-tab-target="#paypal" class="active tab">Paypal</li>
+        <li data-tab-target="#creditDebit" class="tab">Credit/Debit</li>
+        <!-- <li data-tab-target="#bankTransfer" class="tab">Bank Transfer</li> -->
+    </ul>
+
+    <div class="tab-content">
+        <div id="paypal" data-tab-content class="active">
+            <h1>Paypal</h1>
+            <h3 class="lastStep">You will Donate <%=amount%> 	&#128 to <%=title%></h3>
+            <p>Is this correct? <input type="radio" onchange="enableButton('paypalbtn')"> Yes </p>
+            <h6>if the amount or something else is incorrect please go back to the <a href=" goBack()">Previous page</a></h6>
+            <form>
+                <p>Donate via Paypal</p>
+                <input class="textInputs" type="email" placeholder="e-mail" style="margin-bottom: 10px;"><br>
+                <input class="textInputs" type="password" placeholder="Paypal's password">
+                <p><input type="checkbox">I'm not a robot</p>
+                <input class="textInputs" type="submit" value="Confirm" id="paypalbtn" disabled>
+
+            </form>
+
+        </div>
+
+        <div id="creditDebit" data-tab-content>
+            <h1>Credit/Debit</h1>
+            <h3 class="lastStep">You will Donate <%=amount%> 	&#128 to <%=title%></h3>
+            <p>Is this correct? <input type="radio" onchange="enableButton('creditbtn')"> Yes </p>
+            <h6>if the amount or something else is incorrect please go back to the <a href="javascript:alert('Hello World!');">Previous page</a></h6>
+            <form>
+                <p>Donate via Credit or Debit card</p>
+                <input type="email" placeholder="e-mail" style="margin-bottom: 10px;"><br>
+
+
+                <!-- <input type="number" placeholder="Card Number" style="margin-bottom: 10px;"><br>
+                <input type="date" placeholder="exparation date" style="margin-bottom: 10px;"><br>
+                <input type="password" placeholder="3-digit password" style="margin-bottom: 10px;">
+                <p><input type="checkbox">I'm not a robot</p> -->
+
+                <form id="2c2p-payment-form" action="" method="POST">
+                    <input type="text" data-encrypt="cardnumber" maxlength="16"
+                        placeholder="Credit/Debit Card Number"><br />
+                        <input type="number" hidden value="<%=amount%>">
+                    <input type="text" data-encrypt="month" maxlength="2" placeholder="MM"><br />
+                    <input type="text" data-encrypt="year" maxlength="4" placeholder="YYYY"><br />
+                    <input type="password" data-encrypt="cvv" maxlength="3" autocomplete="off" placeholder="CVV2/CVC2"
+                        style="margin-bottom: 10px;"><br />
+
+                </form>
+                <p><input type="checkbox">I'm not a robot</p>
+
+                <input type="submit" value="Confirm" id="creditbtn" disabled>
+
+            </form>
+
+        </div>
+
+        <!-- <div id="bankTransfer" data-tab-content>
+            <h1>Bank Transfer</h1>
+            <h3 class="lastStep">You will Donate ${amount} to ${groupsTitle}</h3>
+            <p>Is this correct? <input type="radio"> Yes </p>
+            <h6>if the amount or something else is incorrect please go back to the <a href="">Previous page</a></h6>
+            <form>
+                <p>Donate via Bank Transfer</p>
+                <input type="email" placeholder="e-mail" style="margin-bottom: 10px;"><br>
+                <input type="password" placeholder="Bank account">
+                <p><input type="checkbox">I'm not a robot</p>
+                <input type="submit" value="Confirm">
+
+            </form>
+        </div> -->
+    </div>
+</body>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+</html>

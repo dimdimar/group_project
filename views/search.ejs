@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/img/fundain_logo.png">
+    <link rel="stylesheet" href="/stylesheets/flex.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Chango&family=Cormorant+Unicase:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+    src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+    integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    var socket = io.connect("<%=Url%>");
+  </script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <div class="backgroundGradient">
+        <header class="blurGlass">
+          <a href="<%=Url%>/dashboard" style="display: contents;"><img src="/img/fundain_logo.png" height="100%" alt="Logo.png"></a>
+          <div id="searchAll">
+            <form action="<%=Url%>/search" method="POST" style="display: contents;">
+                <select name="categories" class="searchCredentials">
+                  <% categories.forEach(element => { %>
+                    <option value="<%=element.category_id%>"><%= element.category_name %></option>
+                    <% }) %>
+                </select>
+                <input type="number" name="minDonation" id="minDonation" placeholder="Minimum Donation" class="searchCredentials" ><br>
+                <input type="search" placeholder="Fundain's search..." name="search" class="searchCredentials">
+                <button><img src="/img/search.svg" alt="SearchImg"></button>
+              </form>          
+          </div>
+          <div>
+            <button style="float: right;"><img src="/img/log-out.svg" alt="SearchImg"onclick = "location.href='<%=Url%>/auth/logout'" ></button>
+            <button style="float: right;"><img src="/img/settings.svg" alt="SearchImg" onclick = "location.href='<%=Url%>/dashboard/settings'"></button>
+          </div>  
+        </header>
+        </div>
+      <div class="main_container">
+        <nav>
+        </nav>
+        <main class="backgroundGradient" style="height:fit-content;">
+            <% if(titleResults.length){ %>
+            <% for(i = 0 ; i < titleResults.length ;i++){ %>
+            <div class="post blurGlass bubble">
+              <div style="display: flex; flex-direction: row;">
+                <a href="<%=Url%>/group/<%=titleResults[i].group_id%>"><img src="/<%=titleResults[i].photo %>" style="width: 30%;" alt=""></a>
+                <div style="display: flex; flex-direction:column;">
+              <input type="number" hidden value="<%=titleResults[i].group_id%>" class="followGroupId">
+              <h3 style="text-align: center; order : 1;"><a href="<%=Url%>/group/<%=titleResults[i].group_id%>"><%=titleResults[i].title%></a></h3>
+              <h4 style="text-align: center; order : 2;">Description</h4>
+              <p style="text-align: center; order : 3;"><%= titleResults[i].description %></p>
+            </div>          
+            </div>
+            <% if (renderFromFollow){ %>
+              <button style="float:right;" class="follow" onclick="followToggle('<%=i%>')">Unfollow</button>
+            <% } else { %>
+              <% if (followCheck.length){ %>
+              <% for(x=0; x < followCheck.length; x++){ %>
+                <% if (titleResults[i].group_id !== followCheck[x].group_id ){ %>
+                  <button style="float:right; " class="follow" onclick="followToggle('<%=i%>')">Follow</button>
+                <% } %>
+                <% if (titleResults[i].group_id == followCheck[x].group_id ) { %>
+                  <button style="float:right;" class="follow" onclick="followToggle('<%=i%>')">Unfollow</button>
+                  <% } %>
+                  <% } %>
+              <% } else { %>
+                  <button style="float:right; " class="follow" onclick="followToggle('<%=i%>')">Follow</button>
+              <% } %>
+              <% } %>
+
+            </div>
+            <% } %>
+          <% } else{ %>
+            <div class="post blurGlass bubble" style="display: flex; flex-direction: row;">
+             <img src="/img/fundain_logo.png" width="40%"  alt="Logo.png" style="order: 1;">
+             <div style="order: 2;">
+              <h3 style="text-align: center; ">We are really sorry! We couldn't Find any matches for your search credentials by title</h3>
+              <p style="text-align: center; ">Please fill out all the fields or check the results from description search bellow! </p>
+            </div>
+            </div>
+            <% } %>
+            <hr>
+            <% if (descriptionResults.length){ %>
+            <h3 style="text-align: center;">Results from description</h3>
+            <% for(i = 0 ; i < descriptionResults.length ;i++){ %>
+              <div class="post blurGlass bubble">
+                <div style="display: flex; flex-direction: row;">
+                  <a href="<%=Url%>/group/<%=descriptionResults[i].group_id%>"><img src="/<%=descriptionResults[i].photo %>" style="width: 30%;" alt=""></a>
+                  <div style="display: flex; flex-direction:column;">
+                <input type="number" hidden value="<%=descriptionResults[i].group_id%>" class="followGroupId">
+                <h3 style="text-align: center; order : 1;"><a href="<%=Url%>/group/<%=descriptionResults[i].group_id%>"><%=descriptionResults[i].title%></a></h3>
+                <br>
+                <h4 style="text-align: center; order : 2;">Description</h4>
+                <p style="text-align: center; order : 3;"><%= descriptionResults[i].description %></p>
+              </div>          
+              </div>
+              <% if (renderFromFollow){ %>
+                <button style="float:right;" class="follow" onclick="followToggle('<%=i%>')">Unfollow</button>
+              <% } else { %>
+                <% if (!followCheck.length){ %>
+                <% for(x=0; x < followCheck.length; x++){ %>
+                  <% if (descriptionResults[i].group_id !== followCheck[x].group_id ){ %>
+                    <button style="float:right; " class="follow" onclick="followToggle('<%=i%>')">Follow</button>
+                  <% } %>
+                  <% if (descriptionResults[i].group_id == followCheck[x].group_id ) { %>
+                    <button style="float:right;" class="follow" onclick="followToggle('<%=i%>')">Unfollow</button>
+                    <% } %>
+                    <% } %>
+                <% } else { %>
+                    <button style="float:right; " class="follow" onclick="followToggle('<%=i%>')">Follow</button>
+                <% } %>
+                <% } %>
+  
+              </div>
+              <% } %>
+              <% } %>
+            
+        
+     
+          
+        </main>
+        <aside>
+          <ul>
+            
+          </ul>
+        </aside>
+      </div>
+      <footer>
+        <p style="color: white;">123456745421</p>
+      </footer> 
+    </div>
+    
+  </body>
+  <script>
+    function followToggle(node){
+      var btn = document.getElementsByClassName("follow")[node]
+      var groupId=document.getElementsByClassName("followGroupId")[node].value
+      var user ='<%=user_id%>'
+      var data={
+        user:user,
+        group:groupId
+      }
+      if (btn.innerHTML=="Follow"){
+       btn.innerHTML="Unfollow"
+       socket.emit("following",data)
+        
+      }else{
+        btn.innerHTML="Follow"
+        socket.emit("unfollowing",data)
+      }
+    }
+  </script>
+</html>
