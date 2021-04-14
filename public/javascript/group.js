@@ -72,7 +72,14 @@ var messageInput =  document.getElementById('message')
         var x = document.getElementById("chatBox");
         if (x.style.display === "none") {
           x.style.display = "flex";
+          document.getElementById('chatToggle').innerHTML  ="Close Chat" 
+          document.getElementById('chatToggle').style.backgroundColor  = "#ff00006b";
         } else {
           x.style.display = "none";
+          document.getElementById('chatToggle').innerHTML = "Open Chat"
+          document.getElementById('chatToggle').style.backgroundColor = 'rgb(8 255 45 / 42%)'
+          
+
+
         }
       }

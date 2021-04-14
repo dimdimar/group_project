@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const dbconnection = require('../../lib/db')
 const auth = require('../../controllers/auth')
-const callTheFollowers = require('../../services/groupServices');
+const groupServices = require('../../services/groupServices');
 const { promise } = require('../../lib/db');
 const { query } = require('express-validator');
 
@@ -16,15 +16,24 @@ paypal.configure({
 /* GET home page. */
 router.get('/:id', auth.isLoggedIn, async function(req, res, next) {
   if(!req.cookies.jwt){res.redirect("/")}
-  const groupService =  new callTheFollowers.groupServices(req.params.id);
+  const groupService =  new groupServices.groupServices(req.params.id);
   let followers =[]
   let user = req.user
   let posts = [];
   let group = [];
   let categories = []
+  let funds = [];
   let fullUrl = req.protocol + '://' + req.get('host');
-  await groupService.allTheServices(group, posts, followers, categories)
-    res.render('group', { results: group[0], Url: fullUrl, user: user, posts: posts, followers: followers, categories:categories });
+  await groupService.allTheServices(group, posts, followers, categories, funds,)
+  console.log(funds)
+    res.render('group', { 
+      results: group[0],
+      Url: fullUrl, 
+      user: user, 
+      posts: posts, 
+      followers: followers, 
+      categories:categories, 
+      funds: funds });
   });
   
   

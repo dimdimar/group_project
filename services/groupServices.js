@@ -6,12 +6,13 @@ class groupServices {
     constructor(group)
     {this.group = group}
 
-   async allTheServices(groupVar, postsVar, followersVar, categoriesVar){
+   async allTheServices(groupVar, postsVar, followersVar, categoriesVar, fundsVar){
        
         groupVar      = await this.callTheGroup(groupVar)
         postsVar      = await this.callThePosts(postsVar)
         followersVar  = await this.callTheFollowers(followersVar)
         categoriesVar = await this.callTheCategories(categoriesVar)
+        fundsVar      = await this.getFunds(fundsVar)
         return [groupVar, postsVar, followersVar, categoriesVar]
     }
 
@@ -59,7 +60,7 @@ callTheGroup(result){
     
     
 }
-callTheCategories (value){
+    callTheCategories (value){
     return new Promise((resolve,reject) =>{
         const query = `select * from foundain_express.category `
         dbconnection.execute(query,function (err,res) {
@@ -70,7 +71,25 @@ callTheCategories (value){
             }
         })
     })}
+
+    getFunds (value){
+        return new Promise((resolve,reject) =>{
+            const query = `SELECT SUM(amount)
+            FROM foundain_express.donation
+            WHERE group_id = ?`
+            dbconnection.execute(query,[this.group],function (err,res) {
+                if(err){return reject(err)
+                } else{                           
+                   res.forEach(element => {value.push(element)});
+                   return resolve(value)
+                }
+            })
+        })
+    }
+    
 }
+
+
 module.exports = {
     groupServices
 }
