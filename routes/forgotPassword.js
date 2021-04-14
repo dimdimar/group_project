@@ -9,7 +9,9 @@ const mg = mailgun({apiKey: process.env.MAILGUN_APIKEY, domain: DOMAIN});
 
 
 router.get('/', (req, res) => {
-    res.render('forgot');
+    var fullUrl = req.protocol + '://' + req.get('host');
+
+    res.render('forgot',{Url:fullUrl});
 });
 
 router.post('/',(req, res) => {

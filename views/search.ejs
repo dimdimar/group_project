@@ -49,7 +49,7 @@
         <nav>
         </nav>
         <main class="backgroundGradient" style="height:fit-content;">
-            <% if(titleResults.length){ %>
+            <% if(titleResults.length > 0){ %>
             <% for(i = 0 ; i < titleResults.length ;i++){ %>
             <div class="post blurGlass bubble">
               <div style="display: flex; flex-direction: row;">
@@ -64,7 +64,7 @@
             <% if (renderFromFollow){ %>
               <button style="float:right;" class="follow" onclick="followToggle('<%=i%>')">Unfollow</button>
             <% } else { %>
-              <% if (followCheck.length){ %>
+              <% if (followCheck.length > 0){ %>
               <% for(x=0; x < followCheck.length; x++){ %>
                 <% if (titleResults[i].group_id !== followCheck[x].group_id ){ %>
                   <button style="float:right; " class="follow" onclick="followToggle('<%=i%>')">Follow</button>
@@ -90,7 +90,7 @@
             </div>
             <% } %>
             <hr>
-            <% if (descriptionResults.length){ %>
+            <% if (descriptionResults.length > 0){ %>
             <h3 style="text-align: center;">Results from description</h3>
             <% for(i = 0 ; i < descriptionResults.length ;i++){ %>
               <div class="post blurGlass bubble">
@@ -107,7 +107,7 @@
               <% if (renderFromFollow){ %>
                 <button style="float:right;" class="follow" onclick="followToggle('<%=i%>')">Unfollow</button>
               <% } else { %>
-                <% if (!followCheck.length){ %>
+                <% if (followCheck.length == 0){ %>
                 <% for(x=0; x < followCheck.length; x++){ %>
                   <% if (descriptionResults[i].group_id !== followCheck[x].group_id ){ %>
                     <button style="float:right; " class="follow" onclick="followToggle('<%=i%>')">Follow</button>

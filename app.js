@@ -17,7 +17,6 @@ const authRouter = require('./routes/auth');
 const dashBoard = require('./routes/entered/dashBoard')
 const search = require('./routes/entered/search')
 const group = require('./routes/entered/group')
-const chatRouter = require('./routes/entered/chatRoute')
 const groupCreate = require("./routes/entered/groupCreate")
 const follow = require('./routes/entered/follows')
 const success = require("./routes/entered/success")
@@ -48,7 +47,6 @@ app.use('/search',search);
 app.use('/follow',follow);
 app.use('/group',group);
 app.use('/groupcreate',groupCreate);
-app.use('/chat',chatRouter);
 app.use('/forgot',forgotPassRouter);
 app.use('/success',success);
 

@@ -5,14 +5,16 @@ const bcrypt = require('bcrypt')
 
 // Enter to login page
 router.get('/login', function(req, res, next) {
-    
-  res.render('login');
+var fullUrl = req.protocol + '://' + req.get('host');
+
+  res.render('login',{ Url:fullUrl });
 });
 
 // Enter to signup page
 router.get('/signup', function(req, res, next) {
+var fullUrl = req.protocol + '://' + req.get('host');
 
-    res.render('signup');
+    res.render('signup',{ Url:fullUrl });
 });
 
 

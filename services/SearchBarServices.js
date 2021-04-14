@@ -25,9 +25,11 @@ class SearchBarServices {
     userFollows (result){
       return new Promise((resolve,reject) =>{
             const query = `select * from follow where user_id = ? and group_id in (?) ;`
-            dbconnection.execute(query,[this.id,this.allResults],function (err,res) {
+            dbconnection.execute(query,[this.id,this.allResults], (err,res) => {
+                console.log(this.allResults)
             if(err){return reject(err)
             } else{
+                console.log(res)
                res.forEach(element => {result.push(element)});
                return resolve(result)
             }
@@ -56,7 +58,6 @@ class SearchBarServices {
        return new Promise((resolve,reject) =>{
                 var query = `select * from foundain_express.groups where match(title) against(?);`
                 dbconnection.execute(query,[this.phrase], (err,res) => {
-                    console.log('simplify', this.phrase)
                 if(err){return reject(err)
                 } else{
                 res.forEach(element => {result.push(element)});
@@ -72,10 +73,8 @@ class SearchBarServices {
         return new Promise((resolve,reject) =>{
             let descQuery = `select * from foundain_express.groups where match(description) against(?)`;
             dbconnection.execute(descQuery,[this.phrase],function (err,searchByDescriptionResults) {
-                console.log("description Var", this.phrase)
             if(err){return reject(err)
             } else{
-                console.log("here",searchByDescriptionResults)
                 searchByDescriptionResults.forEach(element => {descriptionVar.push(element)});
             return resolve(descriptionVar)
             }
@@ -97,26 +96,28 @@ callTheCategories (value){
     })}
 
     Unifier(titleVar,descriptionVar){
-        console.log(titleVar,descriptionVar)
         if(titleVar.length){
             titleVar.forEach(titleElement =>{
-                console.log("titleVar: ", titleElement)
-                console.log("unifier")
                 descriptionVar.forEach((element,index) =>{
-                    console.log("Description : ", element)
-                    console.log(titleElement.group_id == element.group_id)
                 if(titleElement.group_id == element.group_id){
-                    console.log("unifier1")
                     descriptionVar.splice(index,1)
                 }
                 })
             })
         }
-        titleVar.forEach(element =>{
+        titleVar.forEach((element,index) =>{
+            if(titleVar.length  == index + 1){
+                this.allResults +=`${element.group_id}`
+            }else{
             this.allResults +=`${element.group_id},`
+        }
         })
-        descriptionVar.forEach(element =>{
+        descriptionVar.forEach((element, index) =>{
+            if(titleVar.length  == index + 1){
+                this.allResults +=`${element.group_id}`
+            }else{
             this.allResults +=`${element.group_id},`
+        }
         })
     }
     
